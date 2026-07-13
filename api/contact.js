@@ -37,6 +37,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Invalid phone number format.' })
   }
 
+  console.log('Environment Debug:', {
+    SMTP_USER_exists: !!process.env.SMTP_USER,
+    SMTP_PASS_exists: !!process.env.SMTP_PASS,
+    RECEIVER_EMAIL_exists: !!process.env.RECEIVER_EMAIL,
+  })
+
   // Create transporter
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
