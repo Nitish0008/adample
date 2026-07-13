@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import logo from '../assets/logo.jpeg'
+import logo from '../img/logo.png'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -16,7 +16,7 @@ export default function Navbar() {
       {/* ── Announcement Bar ── */}
       <div className="relative overflow-hidden bg-gradient-to-r from-[#0A1E3D] via-[#112B5E] to-[#0A1E3D] py-3 px-4 text-center text-xs sm:text-sm text-white font-medium">
         <div className="relative z-10 flex items-center justify-center gap-2">
-          <span>🚀 Now onboarding <b>5 new clients</b> this month — free growth audit included.</span>
+          <span>Now onboarding <b>5 new clients</b> this month — free growth audit included.</span>
           <a href="#contact" className="text-orange-300 underline hover:text-orange-200 transition-colors font-semibold">
             Claim your spot →
           </a>
@@ -28,7 +28,7 @@ export default function Navbar() {
       <nav className={`w-full transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-slate-100/50 border-b border-slate-100 py-3' : 'bg-white/90 backdrop-blur-sm border-b border-slate-100/50 py-4'}`}>
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
           <a href="#hero" className="flex items-center shrink-0">
-            <img src={logo} alt="Adample" className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 hover:scale-102" />
+            <img src={logo} alt="Adample" className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 hover:scale-102" />
           </a>
 
           {/* Desktop Nav Links */}
@@ -44,16 +44,9 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Action Row */}
           <div className="hidden md:flex items-center gap-6">
-            <a href="tel:+910000000000" className="flex items-center gap-2 text-sm font-bold text-[#0A1E3D] hover:text-blue-600 transition-colors">
-              <span>📞</span> +91 00000 00000
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 text-white font-bold text-sm shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
-            >
-              Get My Free Quote
+            <a href="mailto:adample.digital@gmail.com" className="flex items-center gap-2 text-sm font-bold text-[#0A1E3D] hover:text-blue-600 transition-colors">
+              <span>✉</span> adample.digital@gmail.com
             </a>
           </div>
 
@@ -81,8 +74,8 @@ export default function Navbar() {
               </a>
             ))}
             <hr className="border-slate-100" />
-            <a href="tel:+910000000000" className="flex items-center gap-2 text-base font-bold text-[#0A1E3D] py-1.5">
-              <span>📞</span> +91 00000 00000
+            <a href="mailto:adample.digital@gmail.com" className="flex items-center gap-2 text-base font-bold text-[#0A1E3D] py-1.5">
+              <span>✉</span> adample.digital@gmail.com
             </a>
             <a
               href="#contact"

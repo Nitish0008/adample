@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import logo from '../assets/logo.jpeg'
+import logo from '../img/logo.png'
 
 /* ──────────────────────────────────────────────
    Intersection Observer Hook for Reveal Animations
@@ -26,9 +26,7 @@ function useReveal() {
 }
 const PAINS = [
   "You're spending on ads but can't tell what's actually working.",
-  "Your website gets visitors — but they don't turn into customers.",
   "You're too busy running the business to run the marketing.",
-  "The last agency sent pretty reports and zero real results.",
 ]
 
 export function Problem() {
@@ -83,7 +81,7 @@ export function Solution() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <span className="inline-block font-bold text-xs tracking-widest uppercase text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-4">
-            The Adample difference
+            What Sets Us Apart
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0A1E3D] mb-4">
             A marketing partner that's actually accountable to results
@@ -175,12 +173,11 @@ export function Services() {
 const DIFFS = [
   { title: 'Results, or we work for free', desc: "Clear KPIs agreed upfront — we're on the hook for them." },
   { title: 'A dedicated strategist', desc: "A real human who knows your business — not a rotating junior." },
-  { title: 'A live dashboard', desc: "See every rupee spent and every lead won, any time you like." },
   { title: 'Right-sized for you', desc: "Strategies scaled to a small-business budget — no bloat, no waste." },
 ]
 const COMPARES = [
   { old: 'Locked into 12-month contracts', nw: 'Month-to-month freedom' },
-  { old: 'Confusing reports', nw: 'Plain-English + live dashboard' },
+  // { old: 'Confusing reports', nw: 'Plain-English + live dashboard' },
   { old: 'Vanity metrics', nw: 'Leads & revenue' },
   { old: 'You chase them', nw: 'Proactive weekly updates' },
 ]
@@ -298,7 +295,7 @@ export function Process() {
 const STATS = [
   { val: '3.4×', lbl: 'Avg. return on ad spend' },
   { val: '+180%', lbl: 'Avg. lead increase' },
-  { val: '200+', lbl: 'Businesses grown' },
+  { val: '49+', lbl: 'Businesses grown' },
   { val: '4.9★', lbl: 'Average client rating' },
 ]
 
@@ -334,13 +331,11 @@ export function Results() {
 
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center backdrop-blur-sm">
           <div className="text-slate-200 text-sm sm:text-base leading-relaxed flex-1">
-            <b>Brightly Interiors, Home & Décor</b> — "We were burning budget on ads with nothing to show." In 90 days we delivered <b>2.5× more qualified leads at 40% lower cost per lead.</b>
+            <b>Wildberry holidays K.B. Enterprise</b> — "We were burning budget on ads with nothing to show." In 90 days we delivered <b>2.5× more qualified leads at 40% lower cost per lead.</b>
           </div>
           <div className="flex flex-col items-center md:items-end shrink-0">
             <div className="text-2xl sm:text-3xl font-black text-emerald-400 leading-none mb-1">+152% leads</div>
-            <a href="#contact" className="text-xs sm:text-sm font-bold text-blue-300 hover:text-blue-200 flex items-center gap-1 transition-colors">
-              Read the story →
-            </a>
+
           </div>
         </div>
       </div>
@@ -352,9 +347,9 @@ export function Results() {
    TESTIMONIALS
 ────────────────────────────────────────────── */
 const TESTIMONIALS = [
-  { initials: 'RK', name: 'Riya Kapoor', role: 'Founder, Bloom Studio', quote: "Within two months our booked calls doubled and I finally understand where every rupee of my budget goes. Wish we'd found them sooner." },
-  { initials: 'AM', name: 'Arjun Mehta', role: 'Owner, VaultPay', quote: "No jargon, no lock-in, just results. Our cost per lead dropped 40% in the first quarter. These are the real deal." },
-  { initials: 'SN', name: 'Sana Nair', role: 'Director, CedarCo', quote: "Finally an agency that treats a small business like it matters. The weekly updates alone are worth it. Highly recommend." },
+  { initials: 'RA', name: 'Rishi Agarwal', role: 'Owner, Royaloak', quote: "Royaloak received high-intent leads with impressive quality and consistency. As an international furniture brand, finding the right audience was important for us, and the results delivered were exactly aligned with our expectations." },
+  { initials: 'SB', name: 'Shrilekha Bhattacharjee', role: 'Founder, Wildberry Holidays', quote: "Wildberry Holidays saw great results through lead generation and website design support. The website was professionally created, and the enquiries we received were genuine, relevant, and valuable for our travel business." },
+  { initials: 'MS', name: 'Monjolika Sinha', role: 'Founder, Fairytale Wedding', quote: "Fairytale Wedding received relevant leads for our matrimonial platform, and the overall experience was smooth and professional. The enquiries were from people genuinely interested in our services, which made the results truly valuable." },
 ]
 
 export function Testimonials() {
@@ -441,155 +436,15 @@ export function AuditBand() {
   )
 }
 
-/* ──────────────────────────────────────────────
-   PACKAGES
-────────────────────────────────────────────── */
-const PKGS = [
-  {
-    name: 'Starter', desc: 'For businesses getting serious about growth',
-    features: ['1–2 core channels', 'Monthly strategy & reporting', 'Live dashboard access', 'Dedicated strategist'],
-    popular: false,
-  },
-  {
-    name: 'Growth', desc: 'For businesses ready to scale steadily',
-    features: ['Up to 4 channels', 'Conversion optimisation', 'Bi-weekly strategy calls', 'Priority support'],
-    popular: true,
-  },
-  {
-    name: 'Scale', desc: 'For aggressive, full-service growth',
-    features: ['Full-funnel, all channels', 'Creative & content included', 'Weekly strategy calls', 'Senior growth team'],
-    popular: false,
-  },
-]
-
-export function Packages() {
-  const ref = useReveal()
-  return (
-    <section className="py-24 bg-gradient-to-b from-white to-slate-50" id="packages">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="max-w-3xl mx-auto text-center mb-20">
-          <span className="inline-block font-extrabold text-xs tracking-widest uppercase text-orange-500 bg-orange-500/5 border border-orange-500/20 rounded-full px-4 py-2 mb-4">
-            Find your fit
-          </span>
-          <h2 className="text-3.5xl sm:text-5xl font-black text-[#0A1E3D] mb-5 tracking-tight">
-            Plans that grow with your business
-          </h2>
-          <p className="text-slate-500 text-lg sm:text-xl font-normal leading-relaxed">
-            Every plan is tailored — request a custom quote and we'll right-size it to your goals.
-          </p>
-        </div>
-
-        <div
-          ref={ref}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch opacity-0 translate-y-8 transition-all duration-700 ease-out"
-        >
-          {/* Starter Plan */}
-          <div className="relative bg-white border border-slate-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-between hover:shadow-2xl hover:shadow-slate-100 hover:-translate-y-1 transition-all duration-300">
-            <div>
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="text-2xl font-black text-[#0A1E3D] mb-1">Starter</h3>
-                  <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">{PKGS[0].desc}</div>
-                </div>
-              </div>
-              <ul className="flex flex-col gap-4 text-slate-600 text-sm sm:text-base mb-8">
-                {PKGS[0].features.map((f) => (
-                  <li key={f} className="flex gap-3 items-center">
-                    <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 font-black text-xs flex items-center justify-center shrink-0">✓</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="text-slate-400 italic text-xs mb-4">Custom-priced to your needs</div>
-              <a
-                href="#contact"
-                className="w-full py-4 rounded-xl font-extrabold text-sm text-center block bg-slate-50 hover:bg-slate-100 text-[#0A1E3D] transition-colors duration-200"
-              >
-                Get a Custom Quote
-              </a>
-            </div>
-          </div>
-
-          {/* Growth Plan (Popular Featured) */}
-          <div className="relative bg-gradient-to-b from-[#0A1E3D] to-[#0F2A55] rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-2xl shadow-blue-900/10 hover:shadow-3xl hover:-translate-y-1.5 transition-all duration-300 text-white overflow-hidden">
-            <div className="absolute inset-[-2px] rounded-[26px] bg-gradient-to-br from-blue-500/30 to-orange-500/30 -z-10" />
-            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-orange-500/10 blur-2xl pointer-events-none" />
-
-            <span className="absolute top-4 right-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-extrabold text-[10px] tracking-widest uppercase px-4 py-1.5 rounded-full shadow-lg shadow-orange-500/20">
-              MOST POPULAR
-            </span>
-
-            <div>
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="text-2xl font-black text-white mb-1">Growth</h3>
-                  <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">{PKGS[1].desc}</div>
-                </div>
-              </div>
-              <ul className="flex flex-col gap-4 text-slate-200 text-sm sm:text-base mb-8">
-                {PKGS[1].features.map((f) => (
-                  <li key={f} className="flex gap-3 items-center">
-                    <span className="w-5 h-5 rounded-full bg-orange-500/15 text-orange-400 font-black text-xs flex items-center justify-center shrink-0">✓</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="text-slate-300 italic text-xs mb-4">Custom-priced to your needs</div>
-              <a
-                href="#contact"
-                className="w-full py-4 rounded-xl font-extrabold text-sm text-center block bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-500 text-white shadow-xl shadow-orange-500/20 transition-all duration-200"
-              >
-                Get a Custom Quote
-              </a>
-            </div>
-          </div>
-
-          {/* Scale Plan */}
-          <div className="relative bg-white border border-slate-100 rounded-3xl p-8 sm:p-10 flex flex-col justify-between hover:shadow-2xl hover:shadow-slate-100 hover:-translate-y-1 transition-all duration-300">
-            <div>
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h3 className="text-2xl font-black text-[#0A1E3D] mb-1">Scale</h3>
-                  <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">{PKGS[2].desc}</div>
-                </div>
-              </div>
-              <ul className="flex flex-col gap-4 text-slate-600 text-sm sm:text-base mb-8">
-                {PKGS[2].features.map((f) => (
-                  <li key={f} className="flex gap-3 items-center">
-                    <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 font-black text-xs flex items-center justify-center shrink-0">✓</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="text-slate-400 italic text-xs mb-4">Custom-priced to your needs</div>
-              <a
-                href="#contact"
-                className="w-full py-4 rounded-xl font-extrabold text-sm text-center block bg-slate-50 hover:bg-slate-100 text-[#0A1E3D] transition-colors duration-200"
-              >
-                Get a Custom Quote
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
 
 /* ──────────────────────────────────────────────
    FAQ
 ────────────────────────────────────────────── */
 const FAQS = [
-  { q: 'How much does it cost?', a: "It depends on your goals, channels and budget — which is exactly why we give every business a free, custom quote instead of a one-size-fits-all price. Request yours and we'll tailor it to you." },
+  { q: 'How much does it cost?', a: "It depends on your goals, channels and budget — which is exactly why we give every business a free, custom quote instead of a one-size-fits-all price. Request yours and we'll customise it for you." },
   { q: 'Am I locked into a contract?', a: "No. We work month-to-month, so we have to earn your business every single month." },
   { q: 'How soon will I see results?', a: "Paid channels can show movement within weeks; SEO and content compound over a few months. We set clear expectations upfront." },
-  { q: 'Do you work with businesses my size?', a: "Yes — small businesses and startups are exactly who we specialise in. Our strategies are built for lean budgets." },
+  // { q: 'Do you work with businesses my size?', a: "Yes — small businesses and startups are exactly who we specialise in. Our strategies are built for lean budgets." },
   { q: 'What if it doesn\'t work?', a: "We agree KPIs upfront and stay accountable to them. No lock-in means you're never trapped if we're not delivering." },
 ]
 
@@ -617,8 +472,8 @@ export function FAQ() {
             <div className="w-full bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <div className="text-sm font-bold text-slate-800 mb-2">Still have questions?</div>
               <div className="text-xs text-slate-400 mb-4">We're here to help you clear up any doubts.</div>
-              <a href="tel:+910000000000" className="inline-flex items-center gap-2 text-sm font-extrabold text-blue-600 hover:text-blue-500 transition-colors">
-                <span>📞</span> Contact Strategy Team
+              <a href="#contact" className="inline-flex items-center gap-2 text-sm font-extrabold text-blue-600 hover:text-blue-500 transition-colors">
+                <span>📞</span> Contact Now
               </a>
             </div>
           </div>
@@ -662,16 +517,16 @@ export function Footer() {
     <footer className="bg-[#080F1E] text-slate-400 py-16 lg:py-20 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/5">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-6">
             <div className="mb-6 flex bg-white p-2 rounded-xl w-fit shadow-md">
-              <img src={logo} alt="Adample" className="h-9 w-auto object-contain" />
+              <img src={logo} alt="Adample" className="h-16 w-auto object-contain" />
             </div>
             <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-sm">
               The results-driven marketing partner for small businesses that want real, measurable growth — without the jargon or lock-in.
             </p>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h5 className="font-extrabold text-sm text-white mb-6 uppercase tracking-wider">Services</h5>
             <div className="flex flex-col gap-3 text-sm font-semibold">
               <a href="#services" className="hover:text-white transition-colors">SEO</a>
@@ -681,21 +536,12 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h5 className="font-extrabold text-sm text-white mb-6 uppercase tracking-wider">Company</h5>
             <div className="flex flex-col gap-3 text-sm font-semibold">
               <a href="#" className="hover:text-white transition-colors">About</a>
               <a href="#results" className="hover:text-white transition-colors">Results</a>
               <a href="#" className="hover:text-white transition-colors">Contact</a>
-            </div>
-          </div>
-
-          <div className="lg:col-span-3">
-            <h5 className="font-extrabold text-sm text-white mb-6 uppercase tracking-wider">Get in touch</h5>
-            <div className="flex flex-col gap-3 text-sm font-semibold">
-              <a href="tel:+910000000000" className="hover:text-white transition-colors">📞 +91 00000 00000</a>
-              <a href="mailto:hello@agency.com" className="hover:text-white transition-colors">✉ hello@agency.com</a>
-              <span className="cursor-default hover:text-white transition-colors">📍 Guwahati, India</span>
             </div>
           </div>
         </div>
@@ -720,8 +566,6 @@ export function Footer() {
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <span>·</span>
             <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <span>·</span>
-            <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
           </div>
         </div>
       </div>

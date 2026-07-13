@@ -2,16 +2,61 @@ import { useState } from 'react'
 
 export default function Hero() {
   const [service, setService] = useState('🎯 Paid Ads')
+  const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [note, setNote] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
+    setErrorMessage('')
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email.trim())) {
+      setErrorMessage('Please enter a valid email address.')
       setLoading(false)
-      setDone(true)
-    }, 1500)
+      return
+    }
+
+    // Phone number validation (allows numbers, spaces, dashes, parentheses, optional leading +)
+    // minimum 7 digits, maximum 15 digits
+    const phoneRegex = /^\+?[0-9\s\-()]{7,15}$/
+    if (!phoneRegex.test(phone.trim())) {
+      setErrorMessage('Please enter a valid phone number (at least 7 digits).')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, phone, service, note }),
+      })
+      const data = await response.json()
+      if (response.ok && data.success) {
+        setDone(true)
+        setName('')
+        setEmail('')
+        setPhone('')
+        setNote('')
+      } else {
+        setErrorMessage(data.error || 'Failed to submit form. Please try again.')
+      }
+    } catch (err) {
+      console.error(err)
+      setErrorMessage('Network error. Please try again later.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const services = ['🎯 Paid Ads', '🔎 SEO', '📱 Social Media', '💻 Website']
@@ -49,9 +94,9 @@ export default function Hero() {
             </h1>
 
             {/* Sub-description */}
-            <p className="text-slate-300 text-lg sm:text-xl font-normal leading-relaxed max-w-xl mb-8">
+            {/* <p className="text-slate-300 text-lg sm:text-xl font-normal leading-relaxed max-w-xl mb-8">
               We help small businesses &amp; startups turn websites, ads and social media into a predictable stream of customers — with clear reporting and no long-term lock-in.
-            </p>
+            </p> */}
 
             {/* Call to Actions */}
             <div className="flex flex-wrap gap-4 w-full sm:w-auto mb-8">
@@ -59,7 +104,7 @@ export default function Hero() {
                 href="#contact"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 text-white font-extrabold text-base shadow-xl shadow-orange-500/25 hover:shadow-2xl hover:shadow-orange-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
               >
-                Get My Free Quote →
+                Enquire Now →
               </a>
               <a
                 href="#results"
@@ -140,70 +185,112 @@ export default function Hero() {
           {/* ══════════════════════════════
               RIGHT SIDE: Contact Form Card
           ══════════════════════════════ */}
-          <div className="lg:col-span-5 w-full">
+          <div id="contact" className="lg:col-span-5 w-full scroll-mt-24">
             <div className="relative bg-white/97 rounded-3xl p-8 sm:p-10 shadow-3xl shadow-black/30 border border-white/20 backdrop-blur-xl">
               {/* Colored border overlay */}
               <div className="absolute inset-[-2px] rounded-[26px] bg-gradient-to-br from-blue-500/40 via-purple-500/30 to-orange-500/40 -z-10" />
 
-              {/* Form Step Indicator */}
-              <div className="flex gap-2 mb-2">
-                <span className="h-1.5 rounded-full flex-1 bg-blue-600" />
-                <span className="h-1.5 rounded-full flex-1 bg-slate-100" />
-                <span className="h-1.5 rounded-full flex-1 bg-slate-100" />
-              </div>
-              <div className="text-xs font-bold text-slate-400 mb-6">Step 1 of 3</div>
-
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-1.5 tracking-tight">What do you need help with?</h3>
-              <p className="text-slate-400 text-sm mb-6 leading-relaxed">Pick one to get started — takes 30 seconds.</p>
+              <p className="text-slate-600 text-sm mb-6 leading-relaxed font-black">Pick one to get started — takes 30 seconds.</p>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
-                {/* Service Selector Grid */}
-                <div className="grid grid-cols-2 gap-2.5 mb-2">
-                  {services.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      onClick={() => setService(s)}
-                      className={`font-bold text-xs sm:text-sm py-3 px-2 text-center rounded-xl border-1.5 cursor-pointer transition-all duration-200 ${service === s ? 'border-blue-600 bg-blue-50/50 text-blue-600 shadow-sm' : 'border-slate-100 bg-white text-slate-700 hover:border-slate-200'}`}
+                {/* Service Selector Dropdown */}
+                <div className="flex flex-col gap-1.5 relative mb-2">
+                  <label className="text-xs font-bold text-slate-900">Select Service</label>
+                  <button
+                    type="button"
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="flex items-center justify-between w-full border-1.5 border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-950 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/15 transition-all duration-200 cursor-pointer text-left font-bold"
+                  >
+                    <span>{service}</span>
+                    <svg
+                      className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
                     >
-                      {s}
-                    </button>
-                  ))}
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {isOpen && (
+                    <>
+                      <div className="fixed inset-0 z-15" onClick={() => setIsOpen(false)} />
+                      <div className="absolute z-20 top-full left-0 right-0 mt-1.5 bg-white border border-slate-300 rounded-xl shadow-xl py-1 overflow-hidden transition-all duration-200">
+                        {services.map((s) => (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() => {
+                              setService(s)
+                              setIsOpen(false)
+                            }}
+                            className={`w-full text-left px-4 py-3 text-sm font-bold transition-colors duration-150 cursor-pointer ${service === s ? 'bg-blue-50 text-blue-600' : 'text-slate-900 hover:bg-slate-50'}`}
+                          >
+                            {s}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 {/* Name Field */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-slate-800">Your Name</label>
+                  <label className="text-xs font-bold text-slate-900">Your Name</label>
                   <input
                     type="text"
                     required
                     placeholder="Riya Kapoor"
-                    className="w-full border-1.5 border-slate-100 rounded-xl px-4 py-3 text-sm text-slate-900 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all duration-200"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full border-1.5 border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-950 placeholder:text-slate-400 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/15 transition-all duration-200"
                   />
                 </div>
 
                 {/* Email Field */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-slate-800">Work Email</label>
+                  <label className="text-xs font-bold text-slate-900">Work Email</label>
                   <input
                     type="email"
                     required
                     placeholder="you@business.com"
-                    className="w-full border-1.5 border-slate-100 rounded-xl px-4 py-3 text-sm text-slate-900 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all duration-200"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full border-1.5 border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-950 placeholder:text-slate-400 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/15 transition-all duration-200"
                   />
                 </div>
 
                 {/* Phone Field */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-slate-800">Phone Number</label>
+                  <label className="text-xs font-bold text-slate-900">Phone Number</label>
                   <input
                     type="tel"
                     required
-                    placeholder="+91 98765 43210"
-                    className="w-full border-1.5 border-slate-100 rounded-xl px-4 py-3 text-sm text-slate-900 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all duration-200"
+                    placeholder="Enter your phone number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full border-1.5 border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-950 placeholder:text-slate-400 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/15 transition-all duration-200"
                   />
                 </div>
+
+                {/* Note Field */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold text-slate-900">Note (Optional)</label>
+                  <textarea
+                    placeholder="Enter any additional details or requirements..."
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    rows="3"
+                    className="w-full border-1.5 border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-950 placeholder:text-slate-400 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/15 transition-all duration-200 resize-none font-sans"
+                  />
+                </div>
+
+                {errorMessage && (
+                  <p className="text-red-500 font-bold text-xs text-center">{errorMessage}</p>
+                )}
 
                 {/* Submitting button */}
                 <button
@@ -211,16 +298,16 @@ export default function Hero() {
                   disabled={loading || done}
                   className={`w-full py-4 rounded-xl font-extrabold text-sm sm:text-base text-white tracking-wide shadow-lg cursor-pointer transition-all duration-200 relative overflow-hidden animate-shimmer-btn ${done ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-500 shadow-emerald-500/20' : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-500 shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/25 hover:-translate-y-0.5 active:translate-y-0'}`}
                 >
-                  {done ? '✓ We\'ll reply within 1 business day!' : loading ? 'Sending…' : 'Get My Free Quote →'}
+                  {done ? '✓ We\'ll reply within 1 business day!' : loading ? 'Sending…' : 'Submit'}
                 </button>
               </form>
 
-              <p className="text-slate-400 text-[11px] text-center mt-4">
+              <p className="text-black text-[11px] text-center mt-4 font-black">
                 🔒 Free &amp; no-obligation. We reply within 1 business day.
               </p>
 
               {/* Bottom badging */}
-              <div className="flex justify-center items-center gap-4 border-t border-slate-100 mt-6 pt-5 flex-wrap text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider">
+              <div className="flex justify-center items-center gap-4 border-t border-slate-200 mt-6 pt-5 flex-wrap text-[10px] sm:text-xs text-black font-black uppercase tracking-wider">
                 <span>Google Partner</span>
                 <span>Meta Business Partner</span>
                 <span>★ 4.9 on Google</span>

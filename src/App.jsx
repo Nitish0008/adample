@@ -11,7 +11,6 @@ import {
   Results,
   Testimonials,
   AuditBand,
-  Packages,
   FAQ,
   Footer,
 } from './components/Sections'
@@ -30,7 +29,6 @@ export default function App() {
       <Results />
       <Testimonials />
       <AuditBand />
-      <Packages />
       <FAQ />
       <Footer />
     </>
