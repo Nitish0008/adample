@@ -127,7 +127,6 @@ const SERVICES = [
   { icon: '📱', title: 'Social Media Marketing', desc: "Stay top-of-mind and build a following that buys. Content and community management that actually moves the needle." },
   { icon: '✍️', title: 'Content Marketing', desc: "Become the obvious choice in your niche with blogs, video and assets that attract, educate and convert." },
   { icon: '💻', title: 'Web Design & Landing Pages', desc: "A website that sells while you sleep. Fast, mobile-first pages built to turn clicks into customers." },
-  { icon: '📧', title: 'Email & Automation', desc: "Squeeze more revenue from leads you already have with automated flows that nurture and re-activate on autopilot." },
 ]
 
 export function Services() {
@@ -146,10 +145,10 @@ export function Services() {
 
         <div
           ref={ref}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0 translate-y-8 transition-all duration-700 ease-out"
+          className="flex flex-wrap justify-center gap-6 opacity-0 translate-y-8 transition-all duration-700 ease-out"
         >
           {SERVICES.map((s) => (
-            <div key={s.title} className="relative group bg-white border border-slate-100 rounded-2xl p-6.5 hover:shadow-xl hover:shadow-slate-100 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+            <div key={s.title} className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] relative group bg-white border border-slate-100 rounded-2xl p-6.5 hover:shadow-xl hover:shadow-slate-100 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden">
               <div className="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-blue-600 to-orange-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
               <div>
                 <div className="text-3xl mb-5 flex">{s.icon}</div>
